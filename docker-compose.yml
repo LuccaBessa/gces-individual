@@ -1,27 +1,28 @@
-# compose file with postgres db and the images inside /library_back and /library_front
 version: '3.7'
 
 services:
   db:
-    image: postgres:12.2
+    image: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: library
+      POSTGRES_DB: library_db
     ports:
       - 5432:5432
     volumes:
       - ./db_data:/var/lib/postgresql/data
   back:
-    image: library_back
+    build: 
+      context: ./library_back
     restart: always
     ports:
       - 8000:8000
     depends_on:
       - db
   front:
-    image: library_front
+    build: 
+      context: ./library_front
     restart: always
     ports:
       - 3000:3000
