@@ -13,7 +13,7 @@ services:
     volumes:
       - ./db_data:/var/lib/postgresql/data
   back:
-    build: 
+    build:
       context: ./library_back
     restart: always
     ports:
@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
   front:
-    build: 
+    build:
       context: ./library_front
     restart: always
     ports:
