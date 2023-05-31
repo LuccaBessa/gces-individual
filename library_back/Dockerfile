@@ -1,18 +1,22 @@
-FROM python
+FROM python:latest
+
+COPY . /app
 
 WORKDIR /app
 
-COPY . /app
+EXPOSE 8000
 
 ENV POSTGRES_DB=library_db
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
-ENV POSTGRES_HOST=localhost
+ENV POSTGRES_HOST=db
 ENV POSTGRES_PORT=5432
 
-RUN python3 -m venv env
+RUN python -m venv env
 
 RUN . env/bin/activate
+
+RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 
@@ -21,5 +25,3 @@ RUN python manage.py makemigrations
 RUN python manage.py migrate
 
 RUN python manage.py runserver 0.0.0.0:8000
-
-EXPOSE 8000

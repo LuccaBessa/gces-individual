@@ -1,8 +1,8 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
-    image: postgres
+    build: ./postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: postgres
@@ -11,7 +11,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
   back:
     build:
       context: ./library_back
