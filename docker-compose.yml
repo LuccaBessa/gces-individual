@@ -1,13 +1,13 @@
 version: "3.7"
 
 services:
-  db:
+  postgres:
     build: ./postgres
     restart: always
     environment:
+      POSTGRES_DB: library_db
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: library_db
     ports:
       - 5432:5432
     volumes:
@@ -19,7 +19,7 @@ services:
     ports:
       - 8000:8000
     depends_on:
-      - db
+      - postgres
   front:
     build:
       context: ./library_front
