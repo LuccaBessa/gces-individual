@@ -21,11 +21,10 @@ jobs:
         with:
           node-version: 14
 
-      - name: Go to frontend folder
-        run: cd library_front
-
       - name: Install dependencies
         run: npm ci
+        working-directory: ./library_front
 
       - name: Run tests
         run: npm test
+        working-directory: ./library_front
