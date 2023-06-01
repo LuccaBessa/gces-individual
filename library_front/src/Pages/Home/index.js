@@ -17,14 +17,14 @@ const Home = () => {
 
     const resBooks = async () => {
         await getBooks()
-        .then((response) => setBooks(response?.data));
+            .then((response) => setBooks(response?.data));
     };
 
     useEffect(() => {
         resBooks();
     }, []);
 
-      const listBooks = books.map((book) =>
+    const listBooks = books ? books.map((book) =>
         <Book
             title={book.title}
             author={book.author}
@@ -35,10 +35,10 @@ const Home = () => {
             messageAlert={"Livro alugado com sucesso"}
             messageTernario={"Alugar livro"}
         />
-      );
+    ) : <></>;
 
-return(
-    <Background>
+    return (
+        <Background>
             <h1>
                 Bem vindo a Biblioteca
             </h1>
@@ -46,14 +46,14 @@ return(
                 Livros disponíveis
             </h1>
             <ServicesBook>
-                <Button title="Doar livro" type="side" changeButton={donate}/>
+                <Button title="Doar livro" type="side" changeButton={donate} />
             </ServicesBook>
-        <Center>
-            <BooksList>
-                {listBooks}
-            </BooksList>
-        </Center>
-    </Background>
+            <Center>
+                <BooksList>
+                    {listBooks}
+                </BooksList>
+            </Center>
+        </Background>
     )
 }
 

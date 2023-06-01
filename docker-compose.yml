@@ -28,3 +28,11 @@ services:
       - 3000:3000
     depends_on:
       - back
+  nginx:
+    build:
+      context: ./nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - front
